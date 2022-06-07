@@ -6,6 +6,8 @@ TagManager:
   tags:
   - banana
   - enemy
+  - endOfPlane
+  - actor
   layers:
   - Default
   - TransparentFX
