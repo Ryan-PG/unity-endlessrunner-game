@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; // For UI toolkit
 
 public class BoyController : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class BoyController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip[] clips; // 0 GotCoin 1 GameOver
 
+    // UI Things
+    //[SerializeField] private Text scoreText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,9 @@ public class BoyController : MonoBehaviour
 
         this.audioSource = this.GetComponent<AudioSource>();
 
+
+        // UI Things
+        //scoreText.text = points.ToString();
 
     }
 
@@ -138,10 +145,11 @@ public class BoyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("banana"))
+        if (other.transform.CompareTag("gold"))
         {
             //Debug.Log("Triggered...");
             points++;
+            //scoreText.text = points.ToString();
             //Debug.Log("Points: " + points);
 
             audioSource.clip = clips[0]; // GotCoin Clip
@@ -151,6 +159,13 @@ public class BoyController : MonoBehaviour
         } // if banana
 
     } // onTriggerEnter
+
+    // Reset 
+    public void ResetPoints()
+    {
+        points = 0;
+        //scoreText.text = points.ToString();
+    }
 
 }
 

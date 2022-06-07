@@ -12,7 +12,7 @@ public class DynamicPlane : MonoBehaviour
     void Start()
     {
         blockObjects = new GameObject[points.Length];
-        spawnObjects();
+        SpawnObjects();
     }
 
     // Update is called once per frame
@@ -31,21 +31,34 @@ public class DynamicPlane : MonoBehaviour
         {
             //Debug.Log(this.transform.parent.position);
             //Debug.Log("HELLLLO");
+            DestroyObjects();
             this.transform.parent.position += new Vector3(0, 0, 367.929f); // 377.979 - 10.05
-            spawnObjects();
+            SpawnObjects();
             //Debug.Log(this.transform.parent.position);
         }
     }
 
-    private void spawnObjects()
+    private void SpawnObjects()
     {
+        print("Here is running");
         for (int i=0; i<points.Length; i++)
         {
-            int randomObject = Random.Range(0, 4);
+            int randomObject = Random.Range(0, prefabs.Length);
+            //int randomObject = 1;
+            print(randomObject);
             if (randomObject != 0)
             {
                 blockObjects[i] = GameObject.Instantiate(prefabs[randomObject], points[i].position, Quaternion.identity);
+                print("Instantiating");
             }
+        }
+    }
+
+    private void DestroyObjects()
+    {
+        foreach (GameObject gameObject in blockObjects)
+        {
+            Destroy(gameObject);
         }
     }
 }
