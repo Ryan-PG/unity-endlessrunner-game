@@ -20,7 +20,7 @@ public class BoyController : MonoBehaviour
 
     // Coin and GameOver Sounds
     private AudioSource audioSource;
-    //private AudioClip[] clips; // 0 GotCoin 1 GameOver
+    public AudioClip[] clips; // 0 GotCoin 1 GameOver
 
 
     // Start is called before the first frame update
@@ -34,8 +34,8 @@ public class BoyController : MonoBehaviour
         // Get Transform Completely
         boyTransform = this.transform.GetComponent<Transform>();
 
-        // Set Object position to (0, 1, -8)
-        this.transform.position = new Vector3(0, 1, -8);
+        // Set Object position to (0, 0, 8.632f)
+        this.transform.position = new Vector3(0, 0, 8.632f);
         Debug.Log("Now in position(SpawnPosition): " + this.transform.position);
 
         this.audioSource = this.GetComponent<AudioSource>();
@@ -127,8 +127,8 @@ public class BoyController : MonoBehaviour
             Debug.Log("Enemy accident...");
             Debug.Log("Game Over");
 
-            //audioSource.clip = clips[1]; // GameOver Clip
-            //audioSource.Play();
+            audioSource.clip = clips[1]; // GameOver Clip
+            audioSource.Play();
 
             alive = false;
         } // if enemy
@@ -144,8 +144,8 @@ public class BoyController : MonoBehaviour
             points++;
             //Debug.Log("Points: " + points);
 
-            //audioSource.clip = clips[0]; // GotCoin Clip
-            //audioSource.Play();
+            audioSource.clip = clips[0]; // GotCoin Clip
+            audioSource.Play();
 
             Destroy(other.gameObject);
         } // if banana
