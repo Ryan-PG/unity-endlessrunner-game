@@ -6,7 +6,7 @@ public class BoyController : MonoBehaviour
     private Vector3 boyPosition;
     private Transform boyTransform;
     public float speed = 5f; // Default value for variable
-    public float directionSpeed = 5f;
+    public float directionSpeed = 10f;
 
     // For sharp movements
     private int lineIndex = 0;
@@ -16,15 +16,19 @@ public class BoyController : MonoBehaviour
     private Vector3 movingDirection;
 
     // Collisions
+    private int hearts = 1;
     private bool alive = true;
     private int points = 0;
 
     // Coin and GameOver Sounds
     private AudioSource audioSource;
-    public AudioClip[] clips; // 0 GotCoin 1 GameOver
+    public AudioClip[] audioClips; // 0.GotCoin 1.GetHeart 2.LoseHeart 3.GameOver
 
     // UI Things
-    //[SerializeField] private Text scoreText;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text heartText;
+    [SerializeField] private Text gameOverText;
+    [SerializeField] private GameObject gameOverPanel;
 
 
     // Start is called before the first frame update
@@ -46,14 +50,17 @@ public class BoyController : MonoBehaviour
 
 
         // UI Things
-        //scoreText.text = points.ToString();
+        scoreText.text = "Score: " + points.ToString();
+        heartText.text = hearts.ToString();
+
+        gameOverText.enabled = false;
+        gameOverPanel.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
         if (alive)
         {
@@ -127,44 +134,85 @@ public class BoyController : MonoBehaviour
         } // if alive
     } // Update
 
-    private void OnCollisionEnter(Collision collision)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.CompareTag("enemy"))
+    //    {
+    //        Debug.Log("Enemy accident...");
+    //        Debug.Log("Game Over");
+
+    //        audioSource.clip = clips[1]; // GameOver Clip
+    //        audioSource.Play();
+
+    //        alive = false;
+    //    } // if enemy
+        
+        
+    //} // onCollisionEnter
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.CompareTag("enemy"))
+        if (other.transform.CompareTag("enemy"))
         {
             Debug.Log("Enemy accident...");
             Debug.Log("Game Over");
 
-            audioSource.clip = clips[1]; // GameOver Clip
-            audioSource.Play();
+            if (hearts > 1)
+            {
+                audioSource.clip = audioClips[2]; // HeartCountDown Clip
+                audioSource.Play();
+            } 
+            else
+            {
+                audioSource.clip = audioClips[3]; // GameOver Clip
+                audioSource.Play();
+            }
 
-            alive = false;
+            //alive = false;
+            hearts--;
+
+            heartText.text = hearts.ToString();
+
+            if (hearts == 0)
+            {
+                alive = false;
+
+                gameOverPanel.SetActive(true);
+                gameOverText.enabled = true;
+            }
         } // if enemy
-        
-        
-    } // onCollisionEnter
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("gold"))
+        if (other.transform.CompareTag("coin"))
         {
             //Debug.Log("Triggered...");
             points++;
-            //scoreText.text = points.ToString();
+            scoreText.text = "Score: " +  points.ToString();
             //Debug.Log("Points: " + points);
 
-            audioSource.clip = clips[0]; // GotCoin Clip
+            audioSource.clip = audioClips[0]; // GotCoin Clip
             audioSource.Play();
 
             Destroy(other.gameObject);
-        } // if banana
+        } // if coin
+
+        if (other.transform.CompareTag("heart"))
+        {
+            if (hearts < 5)
+                hearts++;
+
+            audioSource.clip = audioClips[1]; // GotCoin Clip
+            audioSource.Play();
+
+            heartText.text = hearts.ToString();
+        } // if heart
 
     } // onTriggerEnter
 
-    // Reset 
+    // Reset
     public void ResetPoints()
     {
         points = 0;
-        //scoreText.text = points.ToString();
+        scoreText.text = "Score: " + points.ToString();
     }
 
 }

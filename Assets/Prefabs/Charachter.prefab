@@ -374,9 +374,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2002457568535175930}
   - component: {fileID: 2035787499490957684}
+  - component: {fileID: 919132147861450274}
+  - component: {fileID: 919132147861450273}
+  - component: {fileID: 919132147861450272}
   m_Layer: 0
   m_Name: Charachter
-  m_TagString: Untagged
+  m_TagString: boy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,7 +391,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189504593074370624}
-  m_LocalRotation: {x: -0, y: 0.6859655, z: -0, w: 0.72763413}
+  m_LocalRotation: {x: 0, y: 0.6859644, z: 0, w: 0.72763515}
   m_LocalPosition: {x: -391.07, y: 69.7645, z: 10.15}
   m_LocalScale: {x: 1.0544243, y: 1.0544243, z: 1.0544243}
   m_Children:
@@ -421,6 +424,53 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &919132147861450274
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189504593074370624}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
+--- !u!65 &919132147861450273
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189504593074370624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.6328526, z: 1}
+  m_Center: {x: -1.4055872e-10, y: 0.77577883, z: -3.228048e-13}
+--- !u!114 &919132147861450272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189504593074370624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94682a976b1105b4dbff6d5741847825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  directionSpeed: 10
+  audioClips:
+  - {fileID: 8300000, guid: 960c75b0eb73651499edf39d3faed53b, type: 3}
+  - {fileID: 8300000, guid: 960c75b0eb73651499edf39d3faed53b, type: 3}
+  - {fileID: 8300000, guid: 193aa503d5e91274cb67a3687689c077, type: 3}
 --- !u!1 &1310264952620166244
 GameObject:
   m_ObjectHideFlags: 0
